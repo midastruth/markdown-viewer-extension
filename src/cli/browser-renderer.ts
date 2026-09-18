@@ -88,6 +88,8 @@ export interface CliDiagramResult {
 
 type CliBrowserApi = {
   render(request: CliBrowserRenderRequest): Promise<string>;
+  /** Render into the current page without serializing a standalone HTML export. */
+  renderPreview(request: CliBrowserRenderRequest): Promise<void>;
   snapshotDom(request: CliBrowserRenderRequest): Promise<CliBrowserDomSnapshot>;
   collectEpubCss(request: CliBrowserRenderRequest): Promise<string>;
   renderEpub(request: CliBrowserRenderRequest): Promise<{ filename: string; base64: string }>;
@@ -723,6 +725,7 @@ async function renderBookPdf(
 
 window.markdownCli = {
   render,
+  renderPreview: renderContent,
   snapshotDom,
   collectEpubCss: collectEpubCssForCli,
   renderEpub,

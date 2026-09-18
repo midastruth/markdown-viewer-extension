@@ -15,7 +15,50 @@ It is built for technical documentation, engineering notes, research drafts, wee
 - **Firefox:** https://addons.mozilla.org/firefox/addon/markdown-viewer-extension/
 - **Obsidian:** https://community.obsidian.md/plugins/markdown-viewer-extension
 - **VS Code:** https://marketplace.visualstudio.com/items?itemName=xicilion.markdown-viewer-extension · https://open-vsx.org/extension/xicilion/markdown-viewer-extension
+- **Pi:** `pi install git:github.com/markdown-viewer/markdown-viewer-extension`
 - **Mobile:** See the [mobile app docs](https://github.com/markdown-viewer/docs/blob/main/platforms/mobile.md)
+
+## Pi Extension
+
+The repository is a Pi package. It adds both a `/documd` command for interactive
+use and a `documd` tool that the model can call to render Markdown, diagrams,
+and GitBook books.
+
+```bash
+pi install git:github.com/markdown-viewer/markdown-viewer-extension
+pi
+
+# Inside Pi:
+/documd-preview
+/documd README.md README.html
+/documd notes.md report.pdf --theme technical
+/documd flow.puml flow.svg
+```
+
+`/documd-preview` opens a live browser window for model responses. It updates
+while the model streams and renders the latest response with the full docu.md
+pipeline, including Mermaid, PlantUML, math, tables, and charts. The preview is
+served only on `127.0.0.1` with a random session URL. Use
+`/documd-preview open` to reopen the page, `/documd-preview off` to stop it, or
+`/documd-preview --theme technical` to select a docu.md theme.
+
+The model can use the same integration when you ask it to export a Markdown
+file to HTML, EPUB, DOCX, or PDF, or to render a supported diagram to SVG, PNG,
+or DrawIO. Processing stays local and uses the existing docu.md CLI engine.
+Google Chrome must be installed for exports. A Git installation builds the
+browser assets automatically on first use.
+
+For local development:
+
+```bash
+npm install
+npm run build:cli
+pi -e ./extensions/documd.ts
+```
+
+Use `/reload` after changing the extension source. Set `DOCUMD_CLI_PATH` to an
+alternate built `documd.js` entry or `DOCUMD_NODE_PATH` to a specific Node.js
+executable if needed.
 
 ## Node.js HTML CLI
 

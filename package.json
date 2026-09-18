@@ -8,8 +8,14 @@
     "documd": "dist/cli/documd.js"
   },
   "files": [
-    "dist/cli"
+    "dist/cli",
+    "extensions"
   ],
+  "pi": {
+    "extensions": [
+      "./extensions/documd.ts"
+    ]
+  },
   "scripts": {
     "build:chrome": "node chrome/build.js",
     "dev:chrome": "node chrome/dev.js",
@@ -54,6 +60,8 @@
     "github-flavored-markdown",
     "gfm",
     "markdown-parser",
+    "pi-package",
+    "pi-extension",
     "unified",
     "remark",
     "rehype",
@@ -160,6 +168,11 @@
     "vue-router": "^4.5.1",
     "webextension-polyfill": "^0.12.0",
     "xml-js": "^1.6.11"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
   },
   "publisher": "xicilion",
   "categories": [
