@@ -95,6 +95,17 @@ function previewHtml(basePath: string, cwd: string): string {
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="${basePath}/assets/styles.css">
   <style>
+    /* The shared viewer stylesheet targets the extension's fixed app shell and
+       therefore locks body to one viewport with overflow:hidden. This preview
+       has no #page-shell/#markdown-wrapper scroll container, so let the
+       document itself grow and scroll. */
+    html { min-height: 100%; }
+    body {
+      height: auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
     #documd-preview-status {
       position: fixed;
       right: 12px;
