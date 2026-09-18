@@ -24,22 +24,22 @@ The package installs the Pi extension and its local rendering dependencies autom
 
 ## Use in Pi
 
-The package adds a `/documd` command for interactive use and a `documd` tool that the model can call to render Markdown, diagrams, and GitBook books.
+The package adds a `/doc` command for interactive use and a `doc` tool that the model can call to render Markdown, diagrams, and GitBook books.
 
 ```text
 # Inside Pi:
-/documd-preview
-/documd README.md README.html
-/documd notes.md report.pdf --theme technical
-/documd flow.puml flow.svg
+/doc-preview
+/doc README.md README.html
+/doc notes.md report.pdf --theme technical
+/doc flow.puml flow.svg
 ```
 
-`/documd-preview` opens a live browser window for model responses. It updates
+`/doc-preview` opens a live browser window for model responses. It updates
 while the model streams and renders the latest response with the full docu.md
 pipeline, including Mermaid, PlantUML, math, tables, and charts. The preview is
 served only on `127.0.0.1` with a random session URL. Use
-`/documd-preview open` to reopen the page, `/documd-preview off` to stop it, or
-`/documd-preview --theme technical` to select a docu.md theme.
+`/doc-preview open` to reopen the page, `/doc-preview off` to stop it, or
+`/doc-preview --theme technical` to select a docu.md theme.
 
 The model can use the same integration when you ask it to export a Markdown
 file to HTML, EPUB, DOCX, or PDF, or to render a supported diagram to SVG, PNG,
@@ -161,8 +161,8 @@ Document processing is local. docu.md does not require uploading your Markdown f
 ## Getting Started in Pi
 
 1. Install the package with `pi install git:github.com/midastruth/markdown-viewer-extension`.
-2. Start Pi and run `/documd-preview` to preview model responses.
-3. Use `/documd` to render Markdown files, diagrams, or GitBook books.
+2. Start Pi and run `/doc-preview` to preview model responses.
+3. Use `/doc` to render Markdown files, diagrams, or GitBook books.
 4. Choose a theme and export to HTML, PDF, DOCX, or EPUB when needed.
 
 ## Documentation

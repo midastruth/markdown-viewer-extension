@@ -305,9 +305,9 @@ async function runDocumd(
 }
 
 const COMMAND_USAGE =
-  'Usage: /documd <input> [output] [--format html|epub|docx|pdf|svg|png|drawio] [options]. Quote paths containing spaces.';
+  'Usage: /doc <input> [output] [--format html|epub|docx|pdf|svg|png|drawio] [options]. Quote paths containing spaces.';
 const PREVIEW_USAGE =
-  "Usage: /documd-preview [on|open|off] [--theme <id>]. The default starts the live preview.";
+  "Usage: /doc-preview [on|open|off] [--theme <id>]. The default starts the live preview.";
 
 interface PreviewCommandOptions {
   action: "on" | "open" | "off";
@@ -421,13 +421,13 @@ export default function documdExtension(pi: ExtensionAPI) {
     await stopPreview();
   });
   pi.registerTool({
-    name: "documd",
+    name: "doc",
     label: "docu.md",
     description:
       "Render Markdown, text diagrams, or GitBook books to HTML, EPUB, DOCX, PDF, SVG, PNG, or DrawIO using the local docu.md engine and headless Google Chrome. Output is limited to 2000 lines or 50KB.",
     promptSnippet: "Render or export Markdown documents, diagrams, and GitBook books",
     promptGuidelines: [
-      "Use documd when the user asks to preview, render, or export Markdown or a supported text diagram; do not recreate these document formats manually.",
+      "Use doc when the user asks to preview, render, or export Markdown or a supported text diagram; do not recreate these document formats manually.",
     ],
     parameters: DocumdParameters,
 
@@ -448,7 +448,7 @@ export default function documdExtension(pi: ExtensionAPI) {
     },
   });
 
-  pi.registerCommand("documd-preview", {
+  pi.registerCommand("doc-preview", {
     description: "Show model responses in a live docu.md browser preview",
     handler: async (rawArgs, ctx) => {
       let options: PreviewCommandOptions;
@@ -561,7 +561,7 @@ export default function documdExtension(pi: ExtensionAPI) {
     },
   });
 
-  pi.registerCommand("documd", {
+  pi.registerCommand("doc", {
     description: "Render/export Markdown or diagrams with docu.md",
     handler: async (rawArgs, ctx) => {
       if (!rawArgs.trim()) {
