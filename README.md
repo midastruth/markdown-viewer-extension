@@ -1,6 +1,9 @@
-# ![Markdown Viewer](icons/icon48.png) docu.md Markdown Viewer
+# ![Markdown Viewer](icons/icon48.png) docu.md Markdown Viewer for Pi
 
 [English](https://github.com/markdown-viewer/docs/blob/main/readme/README.en.md) · [简体中文](https://github.com/markdown-viewer/docs/blob/main/readme/README.zh-CN.md) · [繁體中文](https://github.com/markdown-viewer/docs/blob/main/readme/README.zh-TW.md) · [Русский](https://github.com/markdown-viewer/docs/blob/main/readme/README.ru.md) · [日本語](https://github.com/markdown-viewer/docs/blob/main/readme/README.ja.md) · [한국어](https://github.com/markdown-viewer/docs/blob/main/readme/README.ko.md) · [Deutsch](https://github.com/markdown-viewer/docs/blob/main/readme/README.de.md) · [Français](https://github.com/markdown-viewer/docs/blob/main/readme/README.fr.md) · [Español](https://github.com/markdown-viewer/docs/blob/main/readme/README.es.md)
+
+> This fork is primarily maintained as a [Pi](https://pi.dev) package.
+> It brings docu.md Markdown rendering and document export into Pi.
 
 Preview Markdown. Preserve the complex parts. Export finished documents.
 
@@ -8,26 +11,22 @@ docu.md Markdown Viewer opens local or online Markdown as a polished reading pag
 
 It is built for technical documentation, engineering notes, research drafts, weekly reports, knowledge-base pages, README files, and AI-generated Markdown that needs final formatting.
 
-## Install
+## Install in Pi
 
-- **Chrome / Chromium:** https://chromewebstore.google.com/detail/markdown-viewer/jekhhoflgcfoikceikgeenibinpojaoi
-- **Microsoft Edge:** https://microsoftedge.microsoft.com/addons/detail/documd-markdown-viewer/iphmkjlbnogmhofmmcahdhodiilokfca
-- **Firefox:** https://addons.mozilla.org/firefox/addon/markdown-viewer-extension/
-- **Obsidian:** https://community.obsidian.md/plugins/markdown-viewer-extension
-- **VS Code:** https://marketplace.visualstudio.com/items?itemName=xicilion.markdown-viewer-extension · https://open-vsx.org/extension/xicilion/markdown-viewer-extension
-- **Pi:** `pi install git:github.com/markdown-viewer/markdown-viewer-extension`
-- **Mobile:** See the [mobile app docs](https://github.com/markdown-viewer/docs/blob/main/platforms/mobile.md)
-
-## Pi Extension
-
-The repository is a Pi package. It adds both a `/documd` command for interactive
-use and a `documd` tool that the model can call to render Markdown, diagrams,
-and GitBook books.
+Install this fork directly from GitHub:
 
 ```bash
-pi install git:github.com/markdown-viewer/markdown-viewer-extension
+pi install git:github.com/midastruth/markdown-viewer-extension
 pi
+```
 
+The package installs the Pi extension and its local rendering dependencies automatically.
+
+## Use in Pi
+
+The package adds a `/documd` command for interactive use and a `documd` tool that the model can call to render Markdown, diagrams, and GitBook books.
+
+```text
 # Inside Pi:
 /documd-preview
 /documd README.md README.html
@@ -146,28 +145,25 @@ docu.md focuses on the handoff formats people ask for after the writing is done:
 
 Exact output options vary by platform. See the platform docs for the environment you use.
 
-## Platforms
+## Scope of This Fork
 
-| Platform | Best For | Docs |
-|---|---|---|
-| Chrome / Chromium | Opening local or online Markdown in the browser | [Chrome docs](https://github.com/markdown-viewer/docs/blob/main/platforms/chrome.md) |
-| Microsoft Edge | Edge Add-ons installation and Edge-managed updates | [Edge docs](https://github.com/markdown-viewer/docs/blob/main/platforms/edge.md) |
-| Firefox | Firefox-based browser workflows | [Firefox docs](https://github.com/markdown-viewer/docs/blob/main/platforms/firefox.md) |
-| Obsidian | Vault-native preview and export | [Obsidian docs](https://github.com/markdown-viewer/docs/blob/main/platforms/obsidian.md) |
-| VS Code | Editor-side preview, commands, and writing workflows | [VS Code docs](https://github.com/markdown-viewer/docs/blob/main/platforms/vscode.md) |
-| Mobile | Opening and sharing Markdown on iOS and Android | [Mobile docs](https://github.com/markdown-viewer/docs/blob/main/platforms/mobile.md) |
+This fork focuses on the Pi integration. It keeps the docu.md rendering engine and
+CLI, while making the Pi package the primary installation and usage path.
+
+The original project also provides browser, Obsidian, VS Code, and mobile
+integrations. See the [upstream repository](https://github.com/markdown-viewer/markdown-viewer-extension)
+if you need those platform-specific packages.
 
 ## Privacy
 
 Document processing is local. docu.md does not require uploading your Markdown files to a remote rendering service for normal preview and export workflows.
 
-## Getting Started
+## Getting Started in Pi
 
-1. Install docu.md on the platform you use.
-2. Open a Markdown file or choose it from your workspace.
-3. Review the rendered document.
-4. Pick a theme if needed.
-5. Export or share the finished result.
+1. Install the package with `pi install git:github.com/midastruth/markdown-viewer-extension`.
+2. Start Pi and run `/documd-preview` to preview model responses.
+3. Use `/documd` to render Markdown files, diagrams, or GitBook books.
+4. Choose a theme and export to HTML, PDF, DOCX, or EPUB when needed.
 
 ## Documentation
 
