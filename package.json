@@ -1,6 +1,6 @@
 {
-  "name": "markdown-viewer-extension",
-  "displayName": "docu.md Markdown Viewer",
+  "name": "pi-markdown-viewer",
+  "displayName": "Pi Markdown Viewer",
   "version": "5.3.1",
   "description": "Open Markdown files in the browser and export polished Word documents with diagrams, editable math, code highlighting, and local processing.",
   "type": "module",
@@ -78,10 +78,10 @@
   "homepage": "https://docu.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markdown-viewer/markdown-viewer-extension.git"
+    "url": "git+https://github.com/midastruth/pi-markdown-viewer.git"
   },
   "bugs": {
-    "url": "https://github.com/markdown-viewer/markdown-viewer-extension/issues"
+    "url": "https://github.com/midastruth/pi-markdown-viewer/issues"
   },
   "dependencies": {
     "@anthropic-ai/bedrock-sdk": "^0.26.0",

@@ -415,7 +415,7 @@ jobs:
           set -euo pipefail
           npm run build:cli
           npm pack --ignore-scripts --pack-destination dist
-          mv dist/markdown-viewer-extension-*.tgz "dist/documd-cli-v${{ needs.prepare.outputs.version }}.tgz"
+          mv dist/pi-markdown-viewer-*.tgz "dist/documd-cli-v${{ needs.prepare.outputs.version }}.tgz"
           ls -lh "dist/documd-cli-v${{ needs.prepare.outputs.version }}.tgz"
 
       - name: Upload to the release

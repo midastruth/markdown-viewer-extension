@@ -1,4 +1,4 @@
-# ![Markdown Viewer](icons/icon48.png) docu.md Markdown Viewer for Pi
+# ![Pi Markdown Viewer](icons/icon48.png) pi-markdown-viewer
 
 [English](https://github.com/markdown-viewer/docs/blob/main/readme/README.en.md) · [简体中文](https://github.com/markdown-viewer/docs/blob/main/readme/README.zh-CN.md) · [繁體中文](https://github.com/markdown-viewer/docs/blob/main/readme/README.zh-TW.md) · [Русский](https://github.com/markdown-viewer/docs/blob/main/readme/README.ru.md) · [日本語](https://github.com/markdown-viewer/docs/blob/main/readme/README.ja.md) · [한국어](https://github.com/markdown-viewer/docs/blob/main/readme/README.ko.md) · [Deutsch](https://github.com/markdown-viewer/docs/blob/main/readme/README.de.md) · [Français](https://github.com/markdown-viewer/docs/blob/main/readme/README.fr.md) · [Español](https://github.com/markdown-viewer/docs/blob/main/readme/README.es.md)
 
@@ -16,7 +16,7 @@ It is built for technical documentation, engineering notes, research drafts, wee
 Install this fork directly from GitHub:
 
 ```bash
-pi install git:github.com/midastruth/markdown-viewer-extension
+pi install git:github.com/midastruth/pi-markdown-viewer
 pi
 ```
 
@@ -159,7 +159,7 @@ Document processing is local. docu.md does not require uploading your Markdown f
 
 ## Getting Started in Pi
 
-1. Install the package with `pi install git:github.com/midastruth/markdown-viewer-extension`.
+1. Install the package with `pi install git:github.com/midastruth/pi-markdown-viewer`.
 2. Start Pi and run `/doc-preview` to preview model responses.
 3. Use `/doc` to render Markdown files, diagrams, or GitBook books.
 4. Choose a theme and export to HTML, PDF, DOCX, or EPUB when needed.
