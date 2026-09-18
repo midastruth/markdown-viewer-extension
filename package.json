@@ -170,9 +170,7 @@
     "xml-js": "^1.6.11"
   },
   "peerDependencies": {
-    "@earendil-works/pi-ai": "*",
-    "@earendil-works/pi-coding-agent": "*",
-    "typebox": "*"
+    "@earendil-works/pi-coding-agent": "*"
   },
   "publisher": "xicilion",
   "categories": [

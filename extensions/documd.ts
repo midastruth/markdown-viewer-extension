@@ -3,85 +3,17 @@ import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 
-import { StringEnum } from "@earendil-works/pi-ai";
 import {
   DEFAULT_MAX_BYTES,
   DEFAULT_MAX_LINES,
   truncateTail,
   type ExtensionAPI,
 } from "@earendil-works/pi-coding-agent";
-import { Type, type Static } from "typebox";
 
 import {
   startAssistantPreviewServer,
   type AssistantPreviewServer,
 } from "./browser-preview.js";
-
-const FORMATS = ["html", "epub", "docx", "pdf", "svg", "png", "drawio"] as const;
-const FRONTMATTER_MODES = ["hide", "table", "raw"] as const;
-const TABLE_LAYOUTS = ["left", "center", "center-full-width"] as const;
-const ALIGNMENTS = ["left", "center"] as const;
-
-const DocumdParameters = Type.Object({
-  input: Type.String({
-    description:
-      "Input file, relative to pi's working directory or absolute. Supports Markdown, SUMMARY.md, and diagram sources such as .puml, .mmd, .dot, .vega, .drawio, .echarts, .svg, .infographic, and .canvas.",
-  }),
-  output: Type.Optional(
-    Type.String({
-      description:
-        "Output file, relative to pi's working directory or absolute. Its extension can select the output format.",
-    }),
-  ),
-  format: Type.Optional(
-    StringEnum(FORMATS, {
-      description: "Output format. Usually inferred from the output extension.",
-    }),
-  ),
-  book: Type.Optional(
-    Type.Boolean({ description: "Export a GitBook SUMMARY.md as a whole book." }),
-  ),
-  diagramType: Type.Optional(
-    Type.String({
-      description:
-        "Diagram renderer override, for example plantuml, mermaid, dot, vega, vega-lite, drawio, or echarts.",
-    }),
-  ),
-  theme: Type.Optional(
-    Type.String({
-      description:
-        "docu.md theme id, for example default, academic, business, technical, minimal, midnight, dracula, or nord.",
-    }),
-  ),
-  title: Type.Optional(Type.String({ description: "Document title override." })),
-  language: Type.Optional(Type.String({ description: "Document language code." })),
-  frontmatter: Type.Optional(StringEnum(FRONTMATTER_MODES)),
-  tableLayout: Type.Optional(StringEnum(TABLE_LAYOUTS)),
-  imageLayout: Type.Optional(StringEnum(ALIGNMENTS)),
-  diagramLayout: Type.Optional(StringEnum(ALIGNMENTS)),
-  mergeEmptyCells: Type.Optional(
-    Type.Boolean({ description: "Merge empty Markdown table cells." }),
-  ),
-  firstLineIndent: Type.Optional(
-    Type.Integer({
-      minimum: 0,
-      maximum: 4,
-      description: "First-line indent in characters (0-4).",
-    }),
-  ),
-  chrome: Type.Optional(
-    Type.String({ description: "Explicit Google Chrome executable path." }),
-  ),
-  timeoutSeconds: Type.Optional(
-    Type.Number({
-      minimum: 1,
-      maximum: 1800,
-      description: "Overall render timeout in seconds (default: 120).",
-    }),
-  ),
-});
-
-export type DocumdInput = Static<typeof DocumdParameters>;
 
 interface DocumdRunResult {
   outputPath?: string;
@@ -105,30 +37,6 @@ const nodeExecutable = process.env.DOCUMD_NODE_PATH || "node";
 
 function stripFileReference(value: string): string {
   return value.startsWith("@") ? value.slice(1) : value;
-}
-
-function parametersToArgs(params: DocumdInput): string[] {
-  const args = [stripFileReference(params.input)];
-  if (params.output) args.push(stripFileReference(params.output));
-  if (params.format) args.push("--format", params.format);
-  if (params.book) args.push("--book");
-  if (params.diagramType) args.push("--diagram-type", params.diagramType);
-  if (params.theme) args.push("--theme", params.theme);
-  if (params.title) args.push("--title", params.title);
-  if (params.language) args.push("--language", params.language);
-  if (params.frontmatter) args.push("--frontmatter", params.frontmatter);
-  if (params.tableLayout) args.push("--table-layout", params.tableLayout);
-  if (params.imageLayout) args.push("--image-layout", params.imageLayout);
-  if (params.diagramLayout) args.push("--diagram-layout", params.diagramLayout);
-  if (params.mergeEmptyCells) args.push("--merge-empty-cells");
-  if (params.firstLineIndent !== undefined) {
-    args.push("--first-line-indent", String(params.firstLineIndent));
-  }
-  if (params.chrome) args.push("--chrome", params.chrome);
-  if (params.timeoutSeconds !== undefined) {
-    args.push("--timeout", String(params.timeoutSeconds));
-  }
-  return args;
 }
 
 /** Split slash-command arguments without invoking a shell. */
@@ -420,34 +328,6 @@ export default function documdExtension(pi: ExtensionAPI) {
     ctx.ui.setStatus("documd-preview", undefined);
     await stopPreview();
   });
-  pi.registerTool({
-    name: "doc",
-    label: "docu.md",
-    description:
-      "Render Markdown, text diagrams, or GitBook books to HTML, EPUB, DOCX, PDF, SVG, PNG, or DrawIO using the local docu.md engine and headless Google Chrome. Output is limited to 2000 lines or 50KB.",
-    promptSnippet: "Render or export Markdown documents, diagrams, and GitBook books",
-    promptGuidelines: [
-      "Use doc when the user asks to preview, render, or export Markdown or a supported text diagram; do not recreate these document formats manually.",
-    ],
-    parameters: DocumdParameters,
-
-    async execute(_toolCallId, params, signal, onUpdate, ctx) {
-      const args = parametersToArgs(params);
-      const result = await runDocumd(pi, args, ctx.cwd, signal, (message) => {
-        onUpdate?.({ content: [{ type: "text", text: message }], details: {} });
-      });
-
-      return {
-        content: [{ type: "text", text: result.text }],
-        details: {
-          outputPath: result.outputPath,
-          format: params.format,
-          hadWarnings: Boolean(result.stderr.trim()),
-        },
-      };
-    },
-  });
-
   pi.registerCommand("doc-preview", {
     description: "Show model responses in a live docu.md browser preview",
     handler: async (rawArgs, ctx) => {

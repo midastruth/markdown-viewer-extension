@@ -24,7 +24,7 @@ The package installs the Pi extension and its local rendering dependencies autom
 
 ## Use in Pi
 
-The package adds a `/doc` command for interactive use and a `doc` tool that the model can call to render Markdown, diagrams, and GitBook books.
+The package adds `/doc` and `/doc-preview` commands for interactive use. It does not expose a document-rendering tool to the model.
 
 ```text
 # Inside Pi:
@@ -41,11 +41,10 @@ served only on `127.0.0.1` with a random session URL. Use
 `/doc-preview open` to reopen the page, `/doc-preview off` to stop it, or
 `/doc-preview --theme technical` to select a docu.md theme.
 
-The model can use the same integration when you ask it to export a Markdown
-file to HTML, EPUB, DOCX, or PDF, or to render a supported diagram to SVG, PNG,
-or DrawIO. Processing stays local and uses the existing docu.md CLI engine.
-Google Chrome must be installed for exports. A Git installation builds the
-browser assets automatically on first use.
+Use `/doc` to export a Markdown file to HTML, EPUB, DOCX, or PDF, or to render
+a supported diagram to SVG, PNG, or DrawIO. Processing stays local and uses the
+existing docu.md CLI engine. Google Chrome must be installed for exports. A Git
+installation builds the browser assets automatically on first use.
 
 For local development:
 
